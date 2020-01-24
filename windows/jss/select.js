@@ -79,9 +79,15 @@ $.get("../jss/getPoems.php", function (data) {
             }
             randomList.push(sentenceList.splice(m,1)[0]);
         }
-        window.parent.generalValues['testList']=randomList;
-        window.parent.newWindow('test');
-        window.parent.document.getElementById('selectWindow').remove();
+        if(randomList.length!=0){
+            window.parent.generalValues['testList']=randomList;
+            window.parent.newWindow('test');
+            window.parent.document.getElementById('selectWindow').remove();
+        }else{
+            window.parent.generalValues['msg']='请至少选择1句话';
+            window.parent.newWindow('msgBox');
+        }
+        
     });
 });
 
