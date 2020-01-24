@@ -1,0 +1,259 @@
+/* #selectContainer {
+    height: 800px;
+    width: 1000px;
+} */
+#selectContainer {
+    height: 100%;
+    width: 100%;
+}
+#choiceHolder {
+    width: 100%;
+    height: 70%;
+    overflow: auto;
+}
+
+#settingHolder {
+    width: 100%;
+    height: 10%;
+    overflow: hidden;
+    top:72%;
+}
+
+.choice {
+    width: 90%;
+    height: 20vh;
+    transform: translate(5%, 0);
+    left:50%;
+    margin-bottom: 12px;
+    border-radius: 3px;
+    transition: 0.5s;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+}
+
+.choice.unselected {
+    background-color: rgba(89,160,202,0.5);
+    border: 1px solid rgba(0,0,0,.12);
+    
+}
+
+.choice.selected {
+    background-color: rgba(197,166,32,0.5);
+    border: 1px solid rgba(255,160,21,.5);
+}
+
+.choice:active {
+    background-color: rgba(89,160,202,0.5);
+}
+
+.choice:hover{
+    background-color: rgba(250,205,75,0.5);
+    
+}
+
+#readyBtn {
+    position: absolute;
+    top: 90%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+#cancelBtn {
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+.choice > .poemName {
+    font-size: 4.5vmin;
+    font-weight: 700;
+    position: absolute;
+    left: 5%;
+    top:20%;
+}
+.choice > .poemText {
+    font-size: 3vmin;
+    position: absolute;
+    left: 5%;
+    top:57%
+}
+.choice > .poemSentenceNum{
+    font-size: 1em;
+    position: absolute;
+    right:5%;
+    top:57%
+}
+
+
+
+input[type=range] {
+    display: block;
+    position: relative;
+    width: 20vw;
+    height: 48px;
+    margin: 8px 0;
+    padding: 0 64px;
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+ 
+ 
+input[type=range]:hover::-webkit-slider-runnable-track {
+    background-color: rgb(250,205,75);
+}
+ 
+input[type=range]:hover::-moz-range-track {
+    background-color: rgb(250,205,75);
+}
+ 
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background-color: rgb(250,205,75);
+}
+ 
+/*range前后图标*/
+ 
+input[type=range]:before, 
+input[type=range]:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 32px;
+    color: #000;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#testNumLable {
+    font-size: 3.5vmin;
+    position: absolute;
+    left:15%;
+    top:50%;
+    transform: translate(0,-50%);
+}
+
+#testNumShower {
+    font-size: 3.5vmins;
+    position: absolute;
+    left:60%;
+    top:50%;
+    transform: translate(0,-50%);
+}
+ 
+input[type=range]:before {
+    left: 16px;
+}
+input[type=range]:after {
+    right: 16px;
+}
+ 
+input[type=range]#sort_tra:before {
+    content: "\e000";
+}
+ 
+input[type=range]#sort_tra:after {
+    content: "\e001";
+}
+ 
+/*range中心圆点*/
+
+#testNumRange{
+    position: absolute;
+    width: 30%;
+    left: 18%;
+    top:35%;
+    transform: translate(0,-50%);
+}
+
+
+ 
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: -7px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+ 
+input[type=range]::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+ 
+input[type=range]::-ms-thumb {
+    -ms-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+ 
+input[type=range]::slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: -6px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+ 
+/*range轨道*/
+ 
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background-color: #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+ 
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    background-color: #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+ 
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 3px;
+    border-color: transparent;
+    color: transparent;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+}

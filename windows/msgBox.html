@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>信息</title>
+        <link rel="stylesheet" type="text/css" href="../css/general.css">
+        <link rel="stylesheet" type="text/css" href="../css/rh_msgBox.css">
+    </head>
+    <body>
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <span id="width" class="sizeHolder">40vmin</span>
+        <span id="height" class="sizeHolder">20vmin</span>
+        <div id="textHolder" class="textBox">
+            <div id="text"></div>
+        </div>
+        <script>
+        $('#text').text(window.parent.generalValues['msg']);
+        </script>        
+        <script src="./jss/windowLoading.js"></script>
+    </body>
+</html>
