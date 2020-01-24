@@ -1,4 +1,4 @@
-"use strict";
+"use strict ";
 var sentenceNum = 0;
 var valJust = 50;
 var selected = [];
