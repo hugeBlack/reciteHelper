@@ -1,0 +1,118 @@
+.poemText {
+    left:50%;
+    top:0;
+    height:70vmin;
+    width: 100%;
+
+}
+#poemText_fake {
+    left:150%;
+    z-index: 999;
+}
+
+.pg {
+    transform: translate(-50%,-50%);
+    width: 100%;
+    left:50%;
+    text-align: center;
+    position: absolute;
+}
+
+.poemName {
+    
+    color:#c0c6c9;
+    font-size: 20pt;
+    top:15%;
+    
+}
+
+.poemContext {
+    color:#ffffff;
+    font-size: 25pt;
+    top:40%;
+}
+
+.panel {
+    top:80vmin;
+    width: 100%;
+    position: absolute;
+}
+#answerPanel {
+    display: none;
+}
+
+#answerBtn {
+    position: absolute;
+    left:50%;
+    transform: translate(-50%,0);
+}
+
+#nextBtn {
+    position: absolute;
+    left:50%;
+    transform: translate(-50%,0);
+}
+
+#trashBtn {
+    position: absolute;
+    left:75%;
+    transform: translate(-50%,0);
+}
+
+#forgetBtn {
+    position: absolute;
+    left:75%;
+    transform: translate(-50%,0);
+}
+
+#historyBtn {
+    position: absolute;
+    left:25%;
+    transform: translate(-50%,0);
+}
+
+@keyframes poem_out{
+    100%{left:-50%;}
+}
+
+@keyframes poem_in{
+    80%{left:50%}
+    100%{left:50%}
+}
+
+@keyframes panelShow{
+    0%{opacity: 0;}
+    100%{opacity: 100;}
+}
+
+#timer {
+    height: 10vmin;
+    width: 20vmin;
+    line-height: 10vh;
+    top: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    background-color: rgb(33, 61, 100);
+    position: absolute;
+    margin: 0px auto;
+    font-size: 7vmin;
+    position: absolute;
+    top:0;
+}
+
+#progressBarHolder {
+    position: absolute;
+    top: 70vmin;
+    width: 100%;
+    height: 2vmin;
+    background-color: rgb(55, 92, 134, 0.75);
+}
+
+#progressBar {
+    position: absolute;
+    bottom: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgb(97, 147, 196, 0.75);
+}

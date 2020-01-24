@@ -1,0 +1,27 @@
+
+
+.window{
+    box-shadow: 0px 0px 20px black;
+    border: 1vh solid rgba(100, 109, 124, 0);
+    position: absolute;
+    background-color: rgba(100, 109, 124, 0.5);
+    height: 30vh;
+    width: 30vw;
+    animation: windowShow 0.5s;
+    transform: translate(-50%,-50%);
+    top:50%;
+    left:50%;
+}
+
+.frame {
+    top:5.5vh;
+    height: calc(100% - 5.5vh);
+    width: 100%;   
+    border: none;
+    position: absolute;
+}
+
+@keyframes windowShow{
+    0%{opacity: 0;};
+    100%{opacity: 100;};
+}
