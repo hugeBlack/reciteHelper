@@ -2,7 +2,7 @@
 古诗文背诵助手<br/>
 没什么用的样子2333<br/>
 诗词库在/jss/poemInfo.json里，示例：
-(''')
+(```)
     {
         "name": "test",
         "content": [
@@ -14,4 +14,4 @@
             {"text":"sentence2D_End.","pos":"end"}
         ]
     }
-(''')
+(```)
