@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>测试结果</title>
+        <link rel="stylesheet" type="text/css" href="../css/general.css" />
+        <link rel="stylesheet" type="text/css" href="../css/rh_testResult.css" />
+    </head>
+    <body>
+        <span id="width" class="sizeHolder">80vmin</span>
+        <span id="height" class="sizeHolder">40vmin</span>
+        <div id="resultHolder" class="textBox">
+            <table id="resultTable">
+                <tr>
+                    <td class="label">总数</td>
+                    <td class="label">掌握</td>
+                    <td class="label">遗忘</td>
+                    <td class="label">分数</td>
+                </tr>
+                <tr>
+                    <td id="totalCount" class="figure">999</td>
+                    <td id="knowCount" class="figure">999</td>
+                    <td id="forgetCount" class="figure">999</td>
+                    <td id="score" class="figure">999</td>
+                </tr>
+            </table>
+            <div id="resultInfo">点击重试，你可以重新对遗忘的句子进行测试，或者关闭</div>
+        </div>
+        <div id="retryBtn" class="okBtn">重试</div>
+        <div id="historyBtn" class="okBtn">历史</div>
+        <script src='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+        <script src="./jss/windowLoading.js"></script>
+        <script src="jss/testResult.js"></script>
+    </body>
+</html>

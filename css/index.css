@@ -29,7 +29,6 @@
     width: 100%;
     position: absolute;
     background-image: url('../bg.jpg');
-    filter: blur(15px);
     z-index: -1;
     background-size: cover;
     background-attachment: fixed;

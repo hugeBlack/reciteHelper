@@ -1,0 +1,59 @@
+#resultHolder{
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+}
+
+#resultTable{
+    top:40%;
+    left: 50%;
+    position: absolute;
+    width: 80%;
+    text-align: center;
+    font-size: 10vmin;
+    transform: translate(-50%,-50%);
+    color: #fff;
+}
+
+.figure{
+    font-size: 20vmin;
+}
+
+#knowCount{
+    color:rgb(126, 219, 72)
+}
+
+#forgetCount{
+    color: rgb(255, 95, 21);
+}
+
+#score{
+    color: rgb(89,160,202);
+}
+
+#resultInfo{
+    top:80%;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 7vmin;
+    color: #ddd;
+}
+
+#retryBtn{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:90%;
+    left:70%;
+}
+
+#historyBtn{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:90%;
+    left:30%;
+}
+
+.label{
+    color: #ccc;
+}

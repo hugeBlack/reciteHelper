@@ -55,7 +55,24 @@ function nextSentence(){
             $('#nextBtn').html('完成');
         }
     } else {
-        console.warn('nope');
+        var forgetCount=0;
+        var knowCount=0;
+        testList.forEach(function(element){
+            if(element.stateId=='forget'){
+                forgetCount++;
+            }
+            if(element.stateId=='knew'){
+                knowCount++;
+            }
+        })
+        window.parent.generalValues['testResult']={
+            'totalCount':testList.length,
+            'knowCount':knowCount,
+            'forgetCount':forgetCount
+        }
+        window.parent.generalValues['historyList']=testList;
+        window.parent.newWindow('testResult');
+        window.parent.closeForm('testWindow');
     }
 }
 
