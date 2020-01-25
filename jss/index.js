@@ -41,7 +41,6 @@ $(document).on('mouseup touchend',function(){
         dragging=false;
     }
 })
-newWindow('select');
 function newWindow(windowName){
     if(!$('#'+windowName+'Window').length>0){
         $('body').append('<div id="'+windowName+'Window" id="selectFrame" class="window"><div class="container_title">加载中</div><div class="container_closeBtn">×</div><iframe class="frame" src="./windows/'+windowName+'.html"></iframe></div>')
