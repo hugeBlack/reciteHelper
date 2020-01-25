@@ -82,7 +82,7 @@ $.get("../jss/getPoems.php", function (data) {
         if(randomList.length!=0){
             window.parent.generalValues['testList']=randomList;
             window.parent.newWindow('test');
-            window.parent.document.getElementById('selectWindow').remove();
+            window.parent.closeForm('selectWindow');
         }else{
             window.parent.generalValues['msg']='请至少选择1句话';
             window.parent.newWindow('msgBox');

@@ -1,9 +1,6 @@
 'use strict';
 var generalValues=[];
-function atest(w){
-    $('#aaaWindow').children('.container_title').html(w);
-}
-
+var windowCount=0;
 function setWindow(windowName,windowTitle,height,width){
     var windowObj=$('#'+windowName+'Window')
     windowObj.children('.container_title').html(windowTitle);
@@ -44,11 +41,34 @@ $(document).on('mouseup touchend',function(){
 function newWindow(windowName){
     if(!$('#'+windowName+'Window').length>0){
         $('body').append('<div id="'+windowName+'Window" id="selectFrame" class="window"><div class="container_title">加载中</div><div class="container_closeBtn">×</div><iframe class="frame" src="./windows/'+windowName+'.html"></iframe></div>')
+        windowCount++;
+        $('#desktop').css('display','none');
+
     }else{
         $('#'+windowName+'Window').children('.frame').attr('src',$('#'+windowName+'Window').children('.frame').attr('src'));
     }
 }
 
+$(document).on('click','.container_closeBtn',function () { 
+    closeForm($(this).parent().attr('id'));
+});
+
+function closeForm(windowName) {
+    windowCount--;
+    if(window.parent.windowCount==0){
+        showDesktop();
+    }
+    $('#'+windowName).remove();    
+}
+
 function generalVar(varName,value){
     generalValues[varName]=value;
 }
+
+function showDesktop() {
+    $('#desktop').css('display','block');
+}
+
+$('#startBtn').click(()=>{
+    newWindow('select');
+})
