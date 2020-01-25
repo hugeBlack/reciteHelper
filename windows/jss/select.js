@@ -91,6 +91,10 @@ $.get("../jss/getPoems.php", function (data) {
     });
 });
 
+$('#cancelBtn').click(()=>{
+    window.parent.closeForm('selectWindow');
+})
+
 function getVal(val) {
     valJust = val;
     $("#testNumShower").html(Math.round(sentenceNum * val / 100));
