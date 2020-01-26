@@ -72,3 +72,7 @@ function showDesktop() {
 $('#startBtn').click(()=>{
     newWindow('select');
 })
+
+$('#seeAllBtn').click(()=>{
+    newWindow('allPassage');
+})
