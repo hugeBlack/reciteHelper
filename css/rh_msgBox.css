@@ -3,7 +3,7 @@
     height: 100%;
     font-size: 20vmin;
     text-align: center;
-    overflow: scroll;
+    overflow: auto;
 }
 #text{
     transform: translate(-50%,-50%);
