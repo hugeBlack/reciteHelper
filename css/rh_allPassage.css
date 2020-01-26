@@ -9,10 +9,56 @@
 
 #packageHolder{
     left:0;
+    overflow:scroll;
 }
 #passageHolder{
     left:33.5%;
+    overflow:scroll;
 }
 #contentHolder{
     left:67%;
+    overflow:scroll;
+}
+
+.passageDiv {
+    width: 90%;
+    height: 10vh;
+    transform: translate(5%, 0);
+    left:50%;
+    margin-bottom: 12px;
+    border-radius: 3px;
+    transition: 0.5s;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+}
+
+.passageDiv.unselected {
+    background-color: rgba(89,160,202,0.5);
+    border: 1px solid rgba(0,0,0,.12);
+    
+}
+
+.passageDiv:active {
+    background-color: rgba(89,160,202,0.5);
+}
+
+.passageDiv:hover{
+    background-color: rgba(250,205,75,0.5);
+    
+}
+
+.poemName{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:50%;
+    left:50%;
+    width: 100%;
+    font-size: 5vmin;
+}
+
+#text{
+    margin: 3vmin;
+    font-size: 4vmin;
+    word-break:break-all;
+    
 }
