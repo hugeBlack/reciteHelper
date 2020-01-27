@@ -8,12 +8,19 @@ function setWindow(windowName,windowTitle,height,width){
     windowObj.css('width',width);
 
 }
-$.get("./jss/getPoems.php", function (data) {
-    window.parent.generalValues['poemList']=JSON.parse(data)
+$.post("./jss/rhSever.php",{'actionCode':'getPoems'}, function (data) {
+    generalValues['poemList']=JSON.parse(data)
 })
 
-$.get("./jss/getPackages.php", function (data) {
-    window.parent.generalValues['packageList']=JSON.parse(data)
+$.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
+    generalValues['packageList']=JSON.parse(data)
+})
+
+$.post("./jss/rhSever.php",{'actionCode':'getPersonalInfo'}, function (data) {
+    if(data!='notLoggedin'){
+        generalValues['personalInfo']=JSON.parse(data)
+        $('#personalInfoBtnText').html(generalValues['personalInfo'].userName);
+    }
 })
 
 var dragging=false;

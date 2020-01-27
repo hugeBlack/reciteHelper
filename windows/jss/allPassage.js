@@ -7,6 +7,10 @@ packageList.forEach(function(element,index) {
 });
 
 $(document).on('click touchend','.packageBtn',function(){
+    $('.packageBtn.selected').removeClass("selected");
+    $('.packageBtn').addClass("unselected");
+    $(this).addClass("selected");
+    $(this).removeClass("unselected");
     $('#passageHolder').html('');
     $('#text').html('选择篇目');
     packageList[$(this).attr('id')].content.forEach(function(element){
@@ -17,6 +21,10 @@ $(document).on('click touchend','.packageBtn',function(){
 
 $(document).on('click touchend','.passageBtn',function(){
     $('#text').html(poemList[$(this).attr('id')].name+'</br>');
+    $('.passageBtn.selected').removeClass("selected");
+    $('.passageBtn').addClass("unselected");
+    $(this).addClass("selected");
+    $(this).removeClass("unselected");
     poemList[$(this).attr('id')].content.forEach(function(element,index){
         $('#text').append(element.text);
         if(element.pos=='end'){
