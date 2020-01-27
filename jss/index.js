@@ -89,3 +89,13 @@ $('#startBtn').click(()=>{
 $('#seeAllBtn').click(()=>{
     newWindow('allPassage');
 })
+
+$.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
+    console.warn(data);
+})
+
+function request(actionCode,value){
+    $.post("./jss/rhSever.php",{'actionCode':actionCode,'data':value}, function (data) {
+        console.warn(1);
+    })
+}

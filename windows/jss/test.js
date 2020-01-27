@@ -71,6 +71,7 @@ function nextSentence(){
             'forgetCount':forgetCount
         }
         window.parent.generalValues['historyList']=testList;
+        window.parent.request('appendHistoryList',testList);
         window.parent.newWindow('testResult');
         window.parent.closeForm('testWindow');
     }
