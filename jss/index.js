@@ -90,12 +90,20 @@ $('#seeAllBtn').click(()=>{
     newWindow('allPassage');
 })
 
+$('#personalInfoBtn').click(()=>{
+    newWindow('personalInfo');
+})
+
 $.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
     console.warn(data);
 })
 
+$.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
+    generalValues['testHistory']=JSON.parse(data);
+})
+
 function request(actionCode,value){
     $.post("./jss/rhSever.php",{'actionCode':actionCode,'data':value}, function (data) {
-        console.warn(1);
+        return(data);
     })
 }

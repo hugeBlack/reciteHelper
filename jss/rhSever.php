@@ -42,11 +42,22 @@ switch($action){//需要连接数据库的，需要用户登录
         $a=$_POST['data'];
         foreach($a as $key => $value){
             unset($a[$key]['text']);
-            $a[$key]['time']=time();
         }
-        $newHistoryList=array_merge($a,json_decode(odbc_result($query,'testHistory')));
+        $time=time();
+        $newHistory=array(array(
+            "time"=>$time,
+            "item"=>$a
+        ));
+        $newHistory=array_merge($newHistory,json_decode(odbc_result($query,'testHistory')));
+        $newHistoryList=array_splice($newHistory,0,30);
+
         $sql ="update info set testHistory='".json_encode($newHistoryList)."' WHERE userId=".($userInfo->id);
         $query = odbc_exec($conn, $sql);
+    break;
+    case 'getHistoryList':
+        $sql ="select * FROM info WHERE userId=".$userInfo->id;
+        $query = odbc_exec($conn, $sql);
+        echo(odbc_result($query,'testHistory'));
     break;
 }
 
