@@ -59,6 +59,10 @@ switch($action){//需要连接数据库的，需要用户登录
         $query = odbc_exec($conn, $sql);
         echo(odbc_result($query,'testHistory'));
     break;
+    case 'clearHistoryList':
+        $sql ="update info set testHistory='[]' WHERE userId=".($userInfo->id);
+        $query = odbc_exec($conn, $sql);
+    break;
 }
 
 ?>

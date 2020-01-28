@@ -21,6 +21,13 @@ $(document).on('click touchend','.historyBtn',function(){
     
 })
 
+$('#clearBtn').click(()=>{
+    window.parent.request('clearHistoryList');
+    window.parent.generalValues['msg']='已清空历史记录并同步';
+    window.parent.newWindow('msgBox');
+    window.parent.closeForm('personalInfoWindow');
+})
+
 function getShowText(record) {//{poemNo: "1", sentenceNo: "3", stateId: "forget"}
     var poem = poemList[record.poemNo];
     var sentencePos = parseInt(record.sentenceNo)    

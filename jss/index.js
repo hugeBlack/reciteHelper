@@ -59,6 +59,7 @@ function closeForm(windowName) {
         showDesktop();
     }
     $('#'+windowName).remove();    
+    getData();
 }
 
 function generalVar(varName,value){
