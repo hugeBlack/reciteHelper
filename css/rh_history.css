@@ -6,7 +6,7 @@
 
 .sentence {
     width: 90%;
-    height: 10vh;
+    height: 10vmin;
     transform: translate(5%, 0);
     left:50%;
     margin-bottom: 12px;
@@ -37,10 +37,6 @@
     border: 1px solid rgba(87,89,138,0.5);
 }
 
-.sentence:active {
-    background-color: rgba(89,160,202,0.5);
-}
-
 .sentence:hover{
     background-color: rgba(250,205,75,0.5);
     
@@ -60,7 +56,7 @@
     top:57%
 }
 .sentence > .sentenceState{
-    font-size: 1em;
+    font-size: 1vmin;
     position: absolute;
     right:5%;
     top:57%

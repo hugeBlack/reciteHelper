@@ -8,20 +8,7 @@ function setWindow(windowName,windowTitle,height,width){
     windowObj.css('width',width);
 
 }
-$.post("./jss/rhSever.php",{'actionCode':'getPoems'}, function (data) {
-    generalValues['poemList']=JSON.parse(data)
-})
-
-$.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
-    generalValues['packageList']=JSON.parse(data)
-})
-
-$.post("./jss/rhSever.php",{'actionCode':'getPersonalInfo'}, function (data) {
-    if(data!='notLoggedin'){
-        generalValues['personalInfo']=JSON.parse(data)
-        $('#personalInfoBtnText').html(generalValues['personalInfo'].userName);
-    }
-})
+getData();
 
 var dragging=false;
 var draggingElement;
@@ -94,13 +81,41 @@ $('#personalInfoBtn').click(()=>{
     newWindow('personalInfo');
 })
 
-$.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
-    console.warn(data);
+$('#syncBtn').click(()=>{
+    getData();
+    generalValues['msg']='已完成同步';
+    newWindow('msgBox');
 })
 
-$.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
-    generalValues['testHistory']=JSON.parse(data);
-})
+function getData(){
+    $.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
+        console.warn(data);
+    })
+
+    $.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
+        if(data!='notLoggedin'){
+            generalValues['testHistory']=JSON.parse(data);
+        }else{
+            generalValues['msg']='请登录';
+            newWindow('msgBox');
+        }
+    })
+
+    $.post("./jss/rhSever.php",{'actionCode':'getPoems'}, function (data) {
+        generalValues['poemList']=JSON.parse(data)
+    })
+
+    $.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
+        generalValues['packageList']=JSON.parse(data)
+    })
+
+    $.post("./jss/rhSever.php",{'actionCode':'getPersonalInfo'}, function (data) {
+        if(data!='notLoggedin'){
+            generalValues['personalInfo']=JSON.parse(data)
+            $('#personalInfoBtnText').html(generalValues['personalInfo'].userName);
+        }
+    })
+}
 
 function request(actionCode,value){
     $.post("./jss/rhSever.php",{'actionCode':actionCode,'data':value}, function (data) {

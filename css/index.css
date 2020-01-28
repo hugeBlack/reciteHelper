@@ -49,7 +49,7 @@
     box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 }
 
-.desktopBtn:hover,#startBtn:hover{
+.desktopBtn:hover,#startBtn:hover,#syncBtn:hover{
     background-color: rgba(150,150,150,0.3);
 }
 
@@ -116,4 +116,35 @@
     left:1vmin;
     font-weight: bolder;
     color:rgb(253,106,0)
+}
+
+#syncBtnImg{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:30%;
+    left:50%;
+    width: 3vmin;
+    height: 3vmin;
+}
+
+#syncBtnText{
+    font-size: 1vmin;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    text-align: center;
+    top:50%;
+    left:50%;
+    color: #fff;
+}
+
+#syncBtn{
+    height: 7vmin;
+    width: 15vmin;
+    position: absolute;
+    top:0%;
+    right:0%;
+    border-radius: 10px;
+    transition: 0.5s;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 }
