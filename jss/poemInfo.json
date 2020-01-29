@@ -72,10 +72,10 @@
     {
         "name": "test",
         "content": [
-            {"text":"sentnce1A_Head,","pos":"head"},
-            {"text":"sentnce1B_End.","pos":"end"},
-            {"text":"sentnce2A_Head,","pos":"head"},
-            {"text":"sentnce2B_Mid,","pos":"mid"},
+            {"text":"sentence1A_Head,","pos":"head"},
+            {"text":"sentence1B_End.","pos":"end"},
+            {"text":"sentence2A_Head,","pos":"head"},
+            {"text":"sentence2B_Mid,","pos":"mid"},
             {"text":"sentence2C_Impossible,","pos":"impossible"},
             {"text":"sentence2D_End.","pos":"end"}
         ]

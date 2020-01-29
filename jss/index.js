@@ -96,9 +96,6 @@ function getData(){
     $.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
         if(data!='notLoggedin'){
             generalValues['testHistory']=JSON.parse(data);
-        }else{
-            generalValues['msg']='请登录';
-            newWindow('msgBox');
         }
     })
 

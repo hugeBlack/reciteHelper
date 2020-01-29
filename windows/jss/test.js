@@ -8,7 +8,7 @@ $(document).ready(()=>{
     testList = window.parent.generalValues['testList'];
     testCount=testList.length;
     showTestSentence(0);
-    countDown(5,0);
+    countDown(30,0);
 
 })
 
@@ -50,7 +50,9 @@ function nextSentence(){
         }, 500);
         nowTestId++;
         showTestSentence(nowTestId);
-        countDown(5,nowTestId);
+        countDown(30,nowTestId);
+        $('#resultPanel').css('display', 'none');
+        $('#userInput').css('display','block')
         if(nowTestId==testList.length-1){
             $('#nextBtn').html('完成');
         }
@@ -78,14 +80,21 @@ function nextSentence(){
 }
 
 function showAnswer() {
-    $('#testPanel').css('display', 'none');
-    $('#answerPanel').css('display', 'block');
-    $("#answerPanel").css("animation", "panelShow 1s");
-    setTimeout(() => {
-        $(".answerPanel").css("animation", "");
-    }, 500);
+    
+
     clearInterval('a');
     $('#poemContext_real').html(getShowText(nowTestId,1));
+    $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':$('#userInput').val(),'answer':getShowText(nowTestId,2)}}, function (data) {
+        $('#resultPanel').css('display', 'block');
+        $('#userInput').css('display','none');
+        $('#resultPanel').html('你的答案:'+$('#userInput').val()+' 得分:'+JSON.parse(data).score);
+        $('#testPanel').css('display', 'none');
+        $('#answerPanel').css('display', 'block');
+        $("#answerPanel").css("animation", "panelShow 1s");
+        setTimeout(() => {
+            $(".answerPanel").css("animation", "");
+        }, 500);
+    })
 }
 
 function showTestSentence(id) {//testlist中的index
@@ -125,7 +134,7 @@ function countDown(timeLeft, id) {//剩余时间，testlist中的index
 
 }
 
-function getShowText(id,showWhat) {//id: testlist中的index; showWhat:{0为和谐过 1为完整的句子}
+function getShowText(id,showWhat) {//id: testlist中的index; showWhat:{0为和谐过 1为完整的句子 2为仅有答案}
     var kokoko;
     var sentencePos = testList[id].sentenceNo
     var poem = poemList[testList[id].poemNo]
@@ -133,6 +142,8 @@ function getShowText(id,showWhat) {//id: testlist中的index; showWhat:{0为和�
         kokoko='______________';
     }else if(showWhat==1){
         kokoko='<span class="answer">'+poem.content[testList[id].sentenceNo].text+'</span>';
+    }else if(showWhat==2){
+        return poem.content[testList[id].sentenceNo].text
     }
     
     if (sentencePos == 0) { //first sentence ___aaa

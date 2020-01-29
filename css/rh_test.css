@@ -116,3 +116,40 @@
     height: 100%;
     background-color: rgb(97, 147, 196, 0.75);
 }
+
+#userInput{
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top:90%;
+    left:50%;
+    height: 10vmin;
+    width: 70%;
+    font-size: 20px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: center;
+    border-bottom: 1px solid rgb(81,103,161);
+    outline: none;
+    background: rgba(0,0,0,0);
+    color:#fff;
+}
+
+#resultPanel{
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top:90%;
+    left:50%;
+    height: 10vmin;
+    width: 70%;
+    font-size: 20px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: center;
+    border-bottom: 1px solid rgb(81,103,161);
+    outline: none;
+    background: rgba(0,0,0,0);
+    color:#fff;
+    display: none;
+}

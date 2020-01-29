@@ -22,7 +22,37 @@ switch($action){//不需要连接数据库的，需要用户登录
     case 'getPersonalInfo':
         echo $_SESSION['userInfo'];
         return;
-        break;
+    break;
+    case 'checkSimilarity':
+        
+        $reg = "/[。，，‘’：；…—]{1}/";
+        $userText=preg_replace($reg, '',$_POST['data']['userText']);
+        $answer=preg_replace($reg, '', $_POST['data']['answer']);
+        if($answer==$userText){
+            echo(json_encode(['score'=>100]));
+            return;
+        }elseif($userText==''){
+            echo(json_encode(['score'=>0]));
+            return;
+        }else{
+            $queryString=[
+                'input'=>[
+                    'qslots'=>[[
+                        'terms_sequence'=>$userText,
+                        'type'=>0,
+                        'items'=>[]
+                    ]],
+                    'tslots'=>[[
+                        'terms_sequence'=>$answer,
+                        'type'=>0,
+                        'items'=>[]
+                    ]],
+                    'type'=>0
+                ]
+            ];
+            echo(json_encode(['score'=>20]));
+            }
+    break;
 }
 
 
@@ -63,6 +93,7 @@ switch($action){//需要连接数据库的，需要用户登录
         $sql ="update info set testHistory='[]' WHERE userId=".($userInfo->id);
         $query = odbc_exec($conn, $sql);
     break;
+    
 }
 
 ?>
