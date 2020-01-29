@@ -9,7 +9,6 @@ function setWindow(windowName,windowTitle,height,width){
 
 }
 getData();
-
 var dragging=false;
 var draggingElement;
 var dy,dx;
@@ -90,7 +89,7 @@ $('#syncBtn').click(()=>{
 
 function getData(){
     $.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
-        console.warn(data);
+        // console.warn(data);
     })
 
     $.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {

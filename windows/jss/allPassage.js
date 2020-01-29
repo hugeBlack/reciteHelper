@@ -1,7 +1,6 @@
 'use strict';
 var packageList=window.parent.generalValues["packageList"];
 var poemList=window.parent.generalValues["poemList"];
-console.warn(packageList);
 packageList.forEach(function(element,index) {
     $('#packageHolder').append('<div class="packageBtn passageDiv unselected" id="'+index+'"><span class="poemName">'+element.pakageName+'</span></div>')
 });

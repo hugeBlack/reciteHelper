@@ -3,7 +3,7 @@ var testCount = 10;
 var nowTestId = 0;
 var testList;
 var poemList=window.parent.generalValues['poemList'];
-
+var hasEnded=false;
 $(document).ready(()=>{
     testList = window.parent.generalValues['testList'];
     testCount=testList.length;
@@ -14,7 +14,6 @@ $(document).ready(()=>{
 
 
 $('#nextBtn').click(function () {
-    testList[nowTestId].stateId='tested';
     nextSentence();
 });
 
@@ -22,14 +21,8 @@ $('#answerBtn').click(function () {
     showAnswer();
 })
 
-
-$(document).on('click touchend','#forgetBtn',() =>{
-    testList[nowTestId].stateId='forget';
-    nextSentence();
-})
-
 $(document).on('click touchend','#trashBtn',() =>{
-    testList[nowTestId].stateId='knew';
+    testList[nowTestId].score=200;
     nextSentence();
 })
 
@@ -60,11 +53,11 @@ function nextSentence(){
         var forgetCount=0;
         var knowCount=0;
         testList.forEach(function(element){
-            if(element.stateId=='forget'){
-                forgetCount++;
-            }
-            if(element.stateId=='knew'){
+            if(element.score>=100){
                 knowCount++;
+            }
+            if(element.score<100){
+                forgetCount++;
             }
         })
         window.parent.generalValues['testResult']={
@@ -80,14 +73,17 @@ function nextSentence(){
 }
 
 function showAnswer() {
-    
-
-    clearInterval('a');
+    hasEnded=true;
     $('#poemContext_real').html(getShowText(nowTestId,1));
-    $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':$('#userInput').val(),'answer':getShowText(nowTestId,2)}}, function (data) {
-        $('#resultPanel').css('display', 'block');
-        $('#userInput').css('display','none');
-        $('#resultPanel').html('你的答案:'+$('#userInput').val()+' 得分:'+JSON.parse(data).score);
+    var reg=/[。？！，、；：“”‘’（）《》〈〉【】『』「」﹃﹄〔〕…—～﹏￥]/g;
+    var userInput=$('#userInput').val().replace(reg,'');
+    var answer=getShowText(nowTestId,2).replace(reg,'');
+    $('#userInput').css('display','none');
+    $('#resultPanel').css('display', 'block');
+    $('#resultPanel').html('请稍等');
+    $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':userInput,'answer':answer}}, function (data) {
+        testList[nowTestId].score=calcScore(userInput,answer,JSON.parse(data).score)
+        $('#resultPanel').html('你的答案:'+userInput+' 得分:'+testList[nowTestId].score);
         $('#testPanel').css('display', 'none');
         $('#answerPanel').css('display', 'block');
         $("#answerPanel").css("animation", "panelShow 1s");
@@ -95,6 +91,36 @@ function showAnswer() {
             $(".answerPanel").css("animation", "");
         }, 500);
     })
+}
+function calcScore(userInput,answer,similarityScore){
+    if(userInput==answer){
+        return 100;
+    }else if(userInput==''){
+        return 0;
+    }
+    var text1=answer.split('');
+    var text2=userInput.split('');
+    var minDistance=[]
+    var credit=0;
+    var maxLength=text1.length>text2.length ? text1.length : text2.length;
+    for(var i=0;i<text1.length;i++){
+        minDistance[i]=maxLength;
+        for(var j=0;j<text2.length;j++){
+            if(text1[i]==text2[j]){
+                if(Math.abs(i-j)<minDistance[i]){
+                    minDistance[i]=Math.abs(i-j);
+                }
+                if(i-j==0){
+                    break;
+                }
+            }
+        }        
+    }
+    minDistance.forEach(function(ele){
+        credit+=ele;
+    })
+    var posScore=(Math.pow(maxLength,2)-credit)/Math.pow(maxLength,2)
+    return Math.round(posScore*100*(1-posScore)+posScore*100*similarityScore);
 }
 
 function showTestSentence(id) {//testlist中的index
@@ -119,8 +145,9 @@ function showTestSentence(id) {//testlist中的index
     }
 }
 function countDown(timeLeft, id) {//剩余时间，testlist中的index
+    hasEnded=false;
     var a = setInterval(() => {
-        if (nowTestId == id) {
+        if (nowTestId == id && !hasEnded) {
             timeLeft--;
             $("#timer").html(timeLeft);
             if (timeLeft <= 0) {

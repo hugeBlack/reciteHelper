@@ -1,14 +1,15 @@
 'use strict'
 var historyList=window.parent.generalValues['historyList'];
 historyList.forEach(element => {
-    var state=getState(element.stateId);
+    var state=getState(element);
     var poemName=window.parent.generalValues['poemList'][element.poemNo].name;
-    $('#historyHolder').append('<div class="sentence '+element.stateId+'"><span class="SentenceText">'+element.text+'</span><span class="poemName">'+poemName+'</span><span class="SentenceState">'+state+'</span></div>')
+    $('#historyHolder').append('<div class="sentence '+state.type+'"><span class="SentenceText">'+element.text+'</span><span class="poemName">'+poemName+'</span><span class="SentenceState">'+element.score+' '+state.text+'</span></div>')
 });
 
-function getState(stateId){
-    if(stateId=='untested'){return '未测试';}
-    if(stateId=='tested'){return '通过';}
-    if(stateId=='knew'){return '掌握';}
-    if(stateId=='forget'){return '遗忘'};
+function getState(element){
+    if(element.score==200){return {text:'I',type:'p'};}
+    if(element.score==100){return {text:'P',type:'p'};}
+    if(element.score>=90 && element.score<100){return {text:'C',type:'c'};}
+    if(element.score>=70 && element.score<90){return {text:'D',type:'d'};}
+    if(element.score<75){return {text:'F',type:'f'};}
 }

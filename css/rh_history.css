@@ -16,18 +16,22 @@
     box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 }
 
-.sentence.tested {
-    background-color: rgba(89,160,202,0.5);
-    border: 1px solid rgba(0,0,0,.12);
-    
-}
-
-.sentence.knew {
+.sentence.p {
     background-color: rgba(134, 218, 66, 0.5);
     border: 1px solid rgba(126, 219, 72, 0.5);
 }
 
-.sentence.forget {
+.sentence.c {
+    background-color: rgba(226, 158, 94, 0.5);
+    border: 1px solid rgba(172, 82, 40, 0.5);
+}
+
+.sentence.d {
+    background-color: rgba(226, 158, 94, 0.5);
+    border: 1px solid rgba(172, 82, 40, 0.5);
+}
+
+.sentence.f {
     background-color: rgba(226, 102, 94, 0.5);
     border: 1px solid rgba(255, 95, 21, 0.5);
 }
@@ -39,7 +43,6 @@
 
 .sentence:hover{
     background-color: rgba(250,205,75,0.5);
-    
 }
 
 .sentence > .sentenceText {

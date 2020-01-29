@@ -26,32 +26,37 @@ switch($action){//不需要连接数据库的，需要用户登录
     case 'checkSimilarity':
         
         $reg = "/[。，，‘’：；…—]{1}/";
-        $userText=preg_replace($reg, '',$_POST['data']['userText']);
-        $answer=preg_replace($reg, '', $_POST['data']['answer']);
+        $userText=$_POST['data']['userText'];
+        $answer=$_POST['data']['answer'];
         if($answer==$userText){
-            echo(json_encode(['score'=>100]));
+            echo(json_encode(['score'=>1]));
             return;
         }elseif($userText==''){
             echo(json_encode(['score'=>0]));
             return;
         }else{
             $queryString=[
-                'input'=>[
-                    'qslots'=>[[
-                        'terms_sequence'=>$userText,
-                        'type'=>0,
-                        'items'=>[]
-                    ]],
-                    'tslots'=>[[
-                        'terms_sequence'=>$answer,
-                        'type'=>0,
-                        'items'=>[]
-                    ]],
-                    'type'=>0
-                ]
+                'text_1'=>$userText,
+                'text_2'=>$answer
             ];
-            echo(json_encode(['score'=>20]));
-            }
+            //echo(json_encode(['score'=>20]));
+            $url="https://aip.baidubce.com/rpc/2.0/nlp/v2/simnet?access_token= 24.dd9f4fc4284af11fe8daa831a9795672.2592000.1582881687.282335-18347284&charset=UTF-8";   
+            $ch = curl_init();
+            $params[CURLOPT_URL] = $url;    //请求url地址
+            $params[CURLOPT_HEADER] = FALSE; //是否返回响应头信息
+            $params[CURLOPT_SSL_VERIFYPEER] = false;
+            $params[CURLOPT_SSL_VERIFYHOST] = false;
+            $params[CURLOPT_RETURNTRANSFER] = true; //是否将结果返回
+            $params[CURLOPT_POST] = true;
+            $params[CURLOPT_POSTFIELDS] = json_encode($queryString);
+            curl_setopt_array($ch, $params); //传入curl参数
+            $content = curl_exec($ch); //执行
+            curl_close($ch); //关闭连接
+       
+            echo $content;
+
+            return;
+        }
     break;
 }
 

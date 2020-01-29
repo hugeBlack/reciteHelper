@@ -1,7 +1,6 @@
 'use strict';
 var historyList=window.parent.generalValues["testHistory"];
 var poemList=window.parent.generalValues["poemList"];
-console.warn(historyList);
 historyList.forEach(function(element,index) {
     var timestamp = element.time;
     var newDate = new Date();
@@ -48,12 +47,13 @@ function getShowText(record) {//{poemNo: "1", sentenceNo: "3", stateId: "forget"
         return recodeDiv(poem.content[sentencePos - 1].text + kokoko + poem.content[sentencePos + 1].text);
     }
     function recodeDiv(text){
-        return '<div class="sentence '+record.stateId+'"><span class="SentenceText">'+text+'</span><span class="poemName">'+poem.name+'</span><span class="SentenceState">'+getState(record.stateId)+'</span></div>'
+        return '<div class="sentence '+getState(record).type+'"><span class="SentenceText">'+text+'</span><span class="poemName">'+poem.name+'</span><span class="SentenceState">'+record.score+' '+getState(record).text+'</span></div>'
     }
-    function getState(stateId){
-        if(stateId=='untested'){return '未测试';}
-        if(stateId=='tested'){return '通过';}
-        if(stateId=='knew'){return '掌握';}
-        if(stateId=='forget'){return '遗忘'};
+    function getState(element){
+        if(element.score==200){return {text:'I',type:'p'};}
+        if(element.score==100){return {text:'P',type:'p'};}
+        if(element.score>=90 && element.score<100){return {text:'C',type:'c'};}
+        if(element.score>=70 && element.score<90){return {text:'D',type:'d'};}
+        if(element.score<75){return {text:'F',type:'f'};}
     }
 }
