@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>poemConverter</title>
+    </head>
+    <body>
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <textarea id="i" style="width: 40%;height: 80%;"></textarea>
+        <textarea id="o" style="width: 40%;height: 80%;position: absolute; left: 50%;"></textarea>
+        <button id="s">convert</button>
+        <div>
+            写在左边的文本框中<br>
+            格式：第一行为诗词名，之后为诗词：诗词（约定标点在最后）+空格+位置信息<br>
+            例如：<br>
+            雨霖铃·寒蝉凄切<br>
+            寒蝉凄切， 1<br>
+            对长亭晚， 2<br>
+            骤雨初歇。 3<br>
+            都门帐饮无绪， 1<br>
+            留恋处， 2<br>
+            兰舟催发。 3<br>
+            <br><br>
+            另外对于一些不可能考的句子，使用4
+            
+        </div>
+        <script>
+            var poemObj;
+            var textList=[]
+            $('#s').click(function(){
+                textList=$('#i').val().split('\n');
+                poemObj={name:textList[0],content:[]};
+                for(var i=1;i<textList.length;i++){
+                    var element=textList[i].split(' ');
+                    poemObj.content.push({
+                        text:element[0],
+                        pos:getType(element[1])
+                    })
+                }
+                console.log(poemObj);
+                $('#o').val(JSON.stringify(poemObj)+',')
+            })
+            function getType(n){
+                switch(parseInt(n)){
+                    case 1:
+                        return 'head';
+                        break;
+                    case 2:
+                        return 'mid';
+                        break;
+                    case 3:
+                        return 'end';
+                        break;
+                    case 4:
+                        return 'imposible';
+                        break;
+                    default:
+                        alert('invald type:'+n);
+                        return 'Invalid';
+                }
+            }
+        </script>
+    </body>
+</html>
