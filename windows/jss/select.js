@@ -18,7 +18,7 @@ packageList.forEach(function(element,index) {
     $('#packageHolder').append('<div class="packageBtn passageDiv unselected" id="'+index+'"><span class="poemName">'+element.pakageName+'</span></div>')
 });
 
-$(document).on('click touchend','.packageBtn',function(){
+$(document).on('click','.packageBtn',function(){
     $('.packageBtn.selected').removeClass("selected");
     $('.packageBtn').addClass("unselected");
     $(this).addClass("selected");
@@ -30,14 +30,14 @@ $(document).on('click touchend','.packageBtn',function(){
     })
 })
 
-$(document).on('click touchend','.passageBtn',function(){
+$(document).on('click','.passageBtn',function(){
     if($(this).hasClass('selected')){
         select($(this),'deselect');
     }else{
         select($(this),'select');
     }
 })
-$(document).on('mousemove touchstart','.passageBtn',function(){
+$(document).on('mousemove','.passageBtn',function(){
     $('#text').html(poemList[$(this).attr('id')].name+'</br>');
     poemList[$(this).attr('id')].content.forEach(function(element,index){
         $('#text').append(element.text);
@@ -130,13 +130,13 @@ function getVal(val) {
     $("#testNumShower").html(Math.round(sentenceNum * val / 100));
 }
 
-$(document).on('click touchend','#selectAllBtn',function(){
+$(document).on('click','#selectAllBtn',function(){
     $('.passageBtn').each(function(){
         select($(this),'select');
     })
 })
 
-$(document).on('click touchend','#invertBtn',function(){
+$(document).on('click','#invertBtn',function(){
     $('.passageBtn').each(function(){
         if($(this).hasClass('unselected')){
             select($(this),'select');
@@ -144,5 +144,5 @@ $(document).on('click touchend','#invertBtn',function(){
             select($(this),'deselect');
         }
     })
-    console.warn(1);
+
 })

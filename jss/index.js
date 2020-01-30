@@ -70,7 +70,13 @@ function showDesktop() {
 }
 
 $('#startBtn').click(()=>{
-    newWindow('select');
+    if(typeof(generalValues['personalInfo'])!="undefined"){
+        newWindow('select');
+    }else{
+        generalValues['msg']='请登录';
+        newWindow('msgBox');
+    }
+    
 })
 
 $('#seeAllBtn').click(()=>{
@@ -81,10 +87,12 @@ $('#personalInfoBtn').click(()=>{
     newWindow('personalInfo');
 })
 
-$('#syncBtn').click(()=>{
+$('#syncBtn').click(function(){
     getData();
-    generalValues['msg']='已完成同步';
-    newWindow('msgBox');
+    $('#syncBtnText').html('已完成同步');
+    setTimeout(function(){
+        $('#syncBtnText').html('数据同步');
+    },1000)
 })
 
 function getData(){
@@ -114,7 +122,7 @@ function getData(){
     $.post("./jss/rhSever.php",{'actionCode':'getPersonalInfo'}, function (data) {
         if(data!='notLoggedin'){
             generalValues['personalInfo']=JSON.parse(data)
-            $('#personalInfoBtnText').html(generalValues['personalInfo'].userName);
+            $('#personalInfoBtnText').html(generalValues['personalInfo'].nickName);
         }
     })
 }
