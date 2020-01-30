@@ -100,11 +100,16 @@ function getData(){
 
     $.post("./jss/rhSever.php",{'actionCode':'getPoems'}, function (data) {
         generalValues['poemList']=JSON.parse(data)
+        $.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
+            generalValues['packageList']=JSON.parse(data)
+            generalValues['packageList'].push({pakageName:'所有篇目',content:[]});
+            generalValues['poemList'].forEach(function(e,index){
+            generalValues['packageList'][generalValues['packageList'].length-1].content.push(index);
+        });
+    })
     })
 
-    $.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
-        generalValues['packageList']=JSON.parse(data)
-    })
+
 
     $.post("./jss/rhSever.php",{'actionCode':'getPersonalInfo'}, function (data) {
         if(data!='notLoggedin'){

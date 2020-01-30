@@ -23,46 +23,70 @@ $(document).on('click touchend','.packageBtn',function(){
     $('.packageBtn').addClass("unselected");
     $(this).addClass("selected");
     $(this).removeClass("unselected");
-    $('#passageHolder').html('<div class="text"><span id="selectAllBtn">全选</span>   <span id="clearBtn">反选</span></div>');
+    $('#passageHolder').html('<div class="text"><span id="selectAllBtn">全选</span>   <span id="invertBtn">反选</span></div>');
     $('#text').html('选择篇目');
     packageList[$(this).attr('id')].content.forEach(function(element){
-        $('#passageHolder').append('<div class="passageBtn passageDiv unselected" id='+element+'><span class="poemName">'+poemList[element].name+'</span></div>')
+        $('#passageHolder').append('<div class="passageBtn passageDiv '+ifSelected(element)+'" id='+element+'><span class="poemName">'+poemList[element].name+'</span></div>')
     })
 })
 
 $(document).on('click touchend','.passageBtn',function(){
-    $('#text').html(poemList[$(this).attr('id')].name+'</br>');
     if($(this).hasClass('selected')){
-        $(this).removeClass("selected");
-        $(this).addClass("unselected");
+        select($(this),'deselect');
+    }else{
+        select($(this),'select');
+    }
+})
+$(document).on('mousemove touchstart','.passageBtn',function(){
+    $('#text').html(poemList[$(this).attr('id')].name+'</br>');
+    poemList[$(this).attr('id')].content.forEach(function(element,index){
+        $('#text').append(element.text);
+        if(element.pos=='end'){
+            $('#text').append('</br>');
+        }
+    })    
+})
+function ifSelected(PoemId){
+    for (var i = 0; i < selected.length; i++) {
+        if (selected[i] == PoemId) {
+            return 'selected'
+        }
+    }
+    return 'unselected'
+}
+function select(passageBtnObj,type){
+    if(type=='select'){
+        passageBtnObj.removeClass("unselected");
+        passageBtnObj.addClass("selected");
         for (var i = 0; i < selected.length; i++) {
-            if (selected[i] == $(this).attr('id')) {
+            if (selected[i] == passageBtnObj.attr('id')) {
+                return;
+            }
+        }
+        
+        selected.push(passageBtnObj.attr('id'));        
+        calcAll();        
+    }
+    if(type=='deselect'){
+        passageBtnObj.removeClass("selected");
+        passageBtnObj.addClass("unselected");
+        for (var i = 0; i < selected.length; i++) {
+            if (selected[i] == passageBtnObj.attr('id')) {
                 selected.splice(i, 1);
                 break;
             }
         }
         calcAll();
-    }else{
-        $(this).removeClass("unselected");
-        $(this).addClass("selected");
-        selected.push($(this).attr('id'));
-        calcAll();
     }
+
     function calcAll() {
         sentenceNum = 0;
         selected.forEach(a => {
             sentenceNum += poemList[a].availableCount;
         });
         getVal(valJust);
-    }
-    poemList[$(this).attr('id')].content.forEach(function(element,index){
-        $('#text').append(element.text);
-        if(element.pos=='end'){
-            $('#text').append('</br>');
-        }
-    })
-    
-})
+    }    
+}
 
 $("#readyBtn").click(function (e) {
     var sentenceList = [];
@@ -105,3 +129,20 @@ function getVal(val) {
     valJust = val;
     $("#testNumShower").html(Math.round(sentenceNum * val / 100));
 }
+
+$(document).on('click touchend','#selectAllBtn',function(){
+    $('.passageBtn').each(function(){
+        select($(this),'select');
+    })
+})
+
+$(document).on('click touchend','#invertBtn',function(){
+    $('.passageBtn').each(function(){
+        if($(this).hasClass('unselected')){
+            select($(this),'select');
+        }else{
+            select($(this),'deselect');
+        }
+    })
+    console.warn(1);
+})

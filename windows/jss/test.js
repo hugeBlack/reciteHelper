@@ -83,6 +83,7 @@ function showAnswer() {
     $('#resultPanel').html('请稍等');
     $('#userInput').val('');
     $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':userInput,'answer':answer}}, function (data) {
+        
         testList[nowTestId].score=calcScore(userInput,answer,JSON.parse(data).score)
         $('#resultPanel').html('你的答案:'+userInput+' 得分:'+testList[nowTestId].score);
         $('#testPanel').css('display', 'none');
@@ -101,6 +102,7 @@ function calcScore(userInput,answer,similarityScore){
     }
     var text1=answer.split('');
     var text2=userInput.split('');
+
     var minDistance=[]
     var credit=0;
     var maxLength=text1.length>text2.length ? text1.length : text2.length;
