@@ -89,13 +89,10 @@ $('#personalInfoBtn').click(()=>{
 
 $('#syncBtn').click(function(){
     getData();
-    $('#syncBtnText').html('已完成同步');
-    setTimeout(function(){
-        $('#syncBtnText').html('数据同步');
-    },1000)
 })
 
 function getData(){
+    $('#syncBtnText').html('同步中');
     $.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
         // console.warn(data);
     })
@@ -112,9 +109,14 @@ function getData(){
             generalValues['packageList']=JSON.parse(data)
             generalValues['packageList'].push({pakageName:'所有篇目',content:[]});
             generalValues['poemList'].forEach(function(e,index){
-            generalValues['packageList'][generalValues['packageList'].length-1].content.push(index);
-        });
-    })
+                generalValues['packageList'][generalValues['packageList'].length-1].content.push(index);
+            });
+            $('#seeAllBtnText').html('共'+generalValues['poemList'].length+'篇')
+            $('#syncBtnText').html('已完成同步');
+            setTimeout(function(){
+                $('#syncBtnText').html('数据同步');
+            },2000)
+        })
     })
 
 

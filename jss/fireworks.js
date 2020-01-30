@@ -36,13 +36,13 @@ function createCircle(e, t) {
     a.alpha = .5,
     a.lineWidth = 6,
     a.draw = function() {
-        ctx.globalAlpha = a.alpha,
-        ctx.beginPath(),
-        ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0),
-        ctx.lineWidth = a.lineWidth,
-        ctx.strokeStyle = a.color,
-        ctx.stroke(),
-        ctx.globalAlpha = 1
+        // ctx.globalAlpha = a.alpha,
+        // ctx.beginPath(),
+        // ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0),
+        // ctx.lineWidth = a.lineWidth,
+        // ctx.strokeStyle = a.color,
+        // ctx.stroke(),
+        // ctx.globalAlpha = 1
     }
     ,
     a
