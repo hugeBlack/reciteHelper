@@ -81,6 +81,7 @@ function showAnswer() {
     $('#userInput').css('display','none');
     $('#resultPanel').css('display', 'block');
     $('#resultPanel').html('请稍等');
+    $('#userInput').val('');
     $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':userInput,'answer':answer}}, function (data) {
         testList[nowTestId].score=calcScore(userInput,answer,JSON.parse(data).score)
         $('#resultPanel').html('你的答案:'+userInput+' 得分:'+testList[nowTestId].score);

@@ -68,16 +68,6 @@
             {"text":"更与何人说？","pos":"end"}
         ]
     },
+    {"name":"春江花月夜","content":[{"text":"春江潮水连海平，","pos":"head"},{"text":"海上明月共潮生。","pos":"end"},{"text":"滟滟随波千万里，","pos":"head"},{"text":"何处春江无月明！","pos":"end"},{"text":"江流宛转绕芳甸，","pos":"head"},{"text":"月照花林皆似霰。","pos":"end"},{"text":"空里流霜不觉飞，","pos":"head"},{"text":"汀上白沙看不见。","pos":"end"},{"text":"江天一色无纤尘，","pos":"head"},{"text":"皎皎空中孤月轮。","pos":"end"},{"text":"江畔何人初见月？","pos":"head"},{"text":"江月何年初照人？","pos":"end"},{"text":"人生代代无穷已，","pos":"head"},{"text":"江月年年望相似。","pos":"end"},{"text":"不知江月待何人，","pos":"head"},{"text":"但见长江送流水。","pos":"end"},{"text":"白云一片去悠悠，","pos":"head"},{"text":"青枫浦上不胜愁。","pos":"end"},{"text":"谁家今夜扁舟子？","pos":"head"},{"text":"何处相思明月楼？","pos":"end"},{"text":"可怜楼上月徘徊，","pos":"head"},{"text":"应照离人妆镜台。","pos":"end"},{"text":"玉户帘中卷不去，","pos":"head"},{"text":"捣衣砧上拂还来。","pos":"end"},{"text":"此时相望不相闻，","pos":"head"},{"text":"愿逐月华流照君。","pos":"end"},{"text":"鸿雁长飞光不度，","pos":"head"},{"text":"鱼龙潜跃水成文。","pos":"end"},{"text":"昨夜闲潭梦落花，","pos":"head"},{"text":"可怜春半不还家。","pos":"end"},{"text":"江水流春去欲尽，","pos":"head"},{"text":"江潭落月复西斜。","pos":"end"},{"text":"斜月沉沉藏海雾，","pos":"head"},{"text":"碣石潇湘无限路。","pos":"end"},{"text":"不知乘月几人归，","pos":"head"},{"text":"落月摇情满江树。","pos":"end"}]}
     
-    {
-        "name": "test",
-        "content": [
-            {"text":"sentence1A_Head,","pos":"head"},
-            {"text":"sentence1B_End.","pos":"end"},
-            {"text":"sentence2A_Head,","pos":"head"},
-            {"text":"sentence2B_Mid,","pos":"mid"},
-            {"text":"sentence2C_Impossible,","pos":"impossible"},
-            {"text":"sentence2D_End.","pos":"end"}
-        ]
-    }
 ]
