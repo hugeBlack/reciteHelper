@@ -83,9 +83,9 @@ function showAnswer() {
     $('#resultPanel').html('请稍等');
     $('#userInput').val('');
     $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':userInput,'answer':answer}}, function (data) {
-        
-        testList[nowTestId].score=calcScore(userInput,answer,JSON.parse(data).score)
-        $('#resultPanel').html('你的答案:'+userInput+' 得分:'+testList[nowTestId].score);
+        var a=calcScore(userInput,answer,JSON.parse(data).score)
+        testList[nowTestId].score=a.score;
+        $('#resultPanel').html('你的答案:'+a.correctText+' 得分:'+testList[nowTestId].score);
         $('#testPanel').css('display', 'none');
         $('#answerPanel').css('display', 'block');
         $("#answerPanel").css("animation", "panelShow 1s");
@@ -96,9 +96,9 @@ function showAnswer() {
 }
 function calcScore(userInput,answer,similarityScore){
     if(userInput==answer){
-        return 100;
+        return {score:100,correctText:userInput};
     }else if(userInput==''){
-        return 0;
+        return {score:0,correctText:'<span class="error">未作答</span>'};
     }
     var text1=answer.split('');
     var text2=userInput.split('');
@@ -122,8 +122,16 @@ function calcScore(userInput,answer,similarityScore){
     minDistance.forEach(function(ele){
         credit+=ele;
     })
-    var posScore=(Math.pow(maxLength,2)-credit)/Math.pow(maxLength,2)
-    return Math.round(posScore*100*(1-posScore)+posScore*100*similarityScore);
+    var posScore=(Math.pow(maxLength,2)-credit)/Math.pow(maxLength,2);
+    var correctText='';
+    text2.forEach(function(letter,index){
+        if(minDistance[index]!=0){
+            correctText+='<span class="error">'+letter+'</span>';
+        }else{
+            correctText+=letter;
+        }
+    })
+    return {score:Math.round(posScore*100*(1-posScore)+posScore*100*similarityScore),correctText:correctText};
 }
 
 function showTestSentence(id) {//testlist中的index

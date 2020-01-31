@@ -40,12 +40,20 @@ $(document).on('click','.passageBtn',function(){
 $(document).on('mousemove','.passageBtn',function(){
     $('#text').html(poemList[$(this).attr('id')].name+'</br>');
     poemList[$(this).attr('id')].content.forEach(function(element,index){
-        $('#text').append(element.text);
+        $('#text').append('<span class="'+getState(element)+'">'+element.text+'</span>');
         if(element.pos=='end'){
             $('#text').append('</br>');
         }
-    })    
+    })
 })
+function getState(element){
+    if(typeof(element.knowPoint)=='undefined'){return 'untested';}
+    if(element.knowPoint>2){return 'i';}
+    if(element.knowPoint>0){return 'p';}
+    if(element.knowPoint>-2){return 'c';}
+    if(element.knowPoint>-3){return 'd';}
+    if(element.knowPoint<=-3){return 'f';}
+}
 function ifSelected(PoemId){
     for (var i = 0; i < selected.length; i++) {
         if (selected[i] == PoemId) {

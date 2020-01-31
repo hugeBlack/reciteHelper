@@ -263,3 +263,24 @@ input[type=range]::-ms-track {
     left: 65%;
     transform: translate(-50%, -50%);
 }
+
+span.i{
+    color: rgba(200,200,200);
+}
+
+span.p {
+    color: rgba(134, 218, 66);
+}
+
+span.c {
+    color: rgba(226, 158, 94);
+}
+
+span.d {
+    color: rgb(250,101,45);
+}
+
+span.f {
+    color: rgba(255,0,0);
+    font-weight: bold;
+}

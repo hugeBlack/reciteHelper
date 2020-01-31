@@ -68,3 +68,28 @@
     word-break:break-all;
     
 }
+
+span.i{
+    color: rgba(200,200,200);
+}
+
+span.p {
+    color: rgba(134, 218, 66);
+}
+
+span.c {
+    color: rgba(226, 158, 94);
+}
+
+span.d {
+    color: rgb(250,101,45);
+}
+
+span.f {
+    color: rgba(255,0,0);
+    font-weight: bold;
+}
+
+span.untested {
+    color: rgba(255,255,255);
+}

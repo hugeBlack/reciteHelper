@@ -92,30 +92,62 @@ $('#syncBtn').click(function(){
 })
 
 function getData(){
+    var time=0;
+    var loaded=0;    
     $('#syncBtnText').html('同步中');
     $.post("./jss/rhSever.php",{'actionCode':'readRecitePeresonalInfo'}, function (data) {
         // console.warn(data);
+        loaded++;
     })
 
-    $.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
-        if(data!='notLoggedin'){
-            generalValues['testHistory']=JSON.parse(data);
+    var a=setInterval(() => {
+        time++;
+        if(loaded>=4){
+            $('#syncBtnText').html('完成:'+time/100+'秒');
+            time=0;
+            loaded==0;
+            setTimeout(function(){
+                $('#syncBtnText').html('数据同步');
+            },2000)
+            clearInterval(a);
         }
-    })
+    },10)
+    
+    function getState(element){
+        if(element.score==200){return 3;}
+        if(element.score==100){return 1;}
+        if(element.score>=85 && element.score<100){return -1;}
+        if(element.score>=70 && element.score<85){return -2;}
+        if(element.score<75){return -3;}
+    }
 
     $.post("./jss/rhSever.php",{'actionCode':'getPoems'}, function (data) {
         generalValues['poemList']=JSON.parse(data)
         $.post("./jss/rhSever.php",{'actionCode':'getPackages'}, function (data) {
+            $.post("./jss/rhSever.php",{'actionCode':'getHistoryList'}, function (data) {
+                if(data!='notLoggedin'){
+                    data=data==''?'[]':data;
+                    generalValues['testHistory']=JSON.parse(data);
+                    generalValues['testHistory'].forEach(function(record){
+                        record.item.forEach(function(sentence,sentenceIndex){
+                            var sentenceNo=parseInt(sentence.sentenceNo);
+                            var poemNo=parseInt(sentence.poemNo);
+                            if(typeof(generalValues['poemList'][poemNo].content[sentenceNo].knowPoint)!='undefined'){
+                                generalValues['poemList'][poemNo].content[sentenceNo].knowPoint+=getState(sentence);
+                            }else{
+                                generalValues['poemList'][poemNo].content[sentenceNo].knowPoint=getState(sentence);
+                            }
+                        })
+                    })
+                }
+                loaded+=3;
+            })            
             generalValues['packageList']=JSON.parse(data)
             generalValues['packageList'].push({pakageName:'所有篇目',content:[]});
             generalValues['poemList'].forEach(function(e,index){
                 generalValues['packageList'][generalValues['packageList'].length-1].content.push(index);
             });
             $('#seeAllBtnText').html('共'+generalValues['poemList'].length+'篇')
-            $('#syncBtnText').html('已完成同步');
-            setTimeout(function(){
-                $('#syncBtnText').html('数据同步');
-            },2000)
         })
     })
 
@@ -125,6 +157,8 @@ function getData(){
         if(data!='notLoggedin'){
             generalValues['personalInfo']=JSON.parse(data)
             $('#personalInfoBtnText').html(generalValues['personalInfo'].nickName);
+        }else{
+            $('#personalInfoBtnText').html('请登录');
         }
     })
 }

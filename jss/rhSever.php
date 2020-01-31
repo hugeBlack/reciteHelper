@@ -83,7 +83,15 @@ switch($action){//需要连接数据库的，需要用户登录
             "time"=>$time,
             "item"=>$a
         ));
-        $newHistory=array_merge($newHistory,json_decode(odbc_result($query,'testHistory')));
+        $a=json_decode(odbc_result($query,'testHistory'));
+        if($a===null){
+            $sql="insert into info(userId) values('".$userInfo->id."')";
+            $query = odbc_exec($conn, $sql);
+            $oldHistory=array();
+        }else{
+            $oldHistory=$a;
+        }
+        $newHistory=array_merge($newHistory,$oldHistory);
         $newHistoryList=array_splice($newHistory,0,30);
 
         $sql ="update info set testHistory='".json_encode($newHistoryList)."' WHERE userId=".($userInfo->id);
