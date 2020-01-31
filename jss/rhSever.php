@@ -61,7 +61,7 @@ switch($action){//不需要连接数据库的，需要用户登录
 }
 
 
-$odbc = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=".realpath("./userReciteInfo.mdb");
+$odbc = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=".realpath("../database/userReciteInfo.mdb");
 $conn = odbc_connect($odbc, '', '');
 $userInfo=json_decode($_SESSION['userInfo']);
 
