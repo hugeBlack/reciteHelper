@@ -52,13 +52,15 @@ $(document).on('click','.container_closeBtn',function () {
     closeForm($(this).parent().attr('id'));
 });
 
-function closeForm(windowName) {
+function closeForm(windowName,ifRenew) {
     windowCount--;
     if(window.parent.windowCount==0){
         showDesktop();
     }
-    $('#'+windowName).remove();    
-    getData();
+    $('#'+windowName).remove();
+    if(ifRenew==true){
+        getData();
+    }
 }
 
 function generalVar(varName,value){
