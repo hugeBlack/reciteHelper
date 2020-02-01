@@ -39,7 +39,7 @@ $(document).on('mouseup touchend',function(){
 })
 function newWindow(windowName){
     if(!$('#'+windowName+'Window').length>0){
-        $('body').append('<div id="'+windowName+'Window" id="selectFrame" class="window"><div class="container_title">加载中</div><div class="container_closeBtn">×</div><iframe class="frame" src="./windows/'+windowName+'.html"></iframe></div>')
+        $('body').append('<div id="'+windowName+'Window" class="window"><div class="container_title">加载中</div><div class="container_closeBtn">×</div><iframe class="frame" src="./windows/'+windowName+'.html"></iframe></div>')
         windowCount++;
         $('#desktop').css('display','none');
 
@@ -71,7 +71,7 @@ function showDesktop() {
 
 $('#startBtn').click(()=>{
     if(typeof(generalValues['personalInfo'])!="undefined"){
-        newWindow('select');
+        newWindow('modeSelect');
     }else{
         generalValues['msg']='请登录';
         newWindow('msgBox');
@@ -108,7 +108,7 @@ function getData(){
             loaded==0;
             setTimeout(function(){
                 $('#syncBtnText').html('数据同步');
-            },2000)
+            },1000)
             clearInterval(a);
         }
     },10)

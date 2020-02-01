@@ -8,3 +8,6 @@ $('#score').html(Math.round((1-result.forgetCount/result.totalCount)*100));
 $('#historyBtn').click(()=>{
     window.parent.newWindow('history');
 })
+$('#finishBtn').click(()=>{
+    window.parent.closeForm('testResultWindow');
+})

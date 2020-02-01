@@ -40,7 +40,7 @@
     color: #ddd;
 }
 
-#retryBtn{
+#finishBtn{
     position: absolute;
     transform: translate(-50%,-50%);
     top:90%;

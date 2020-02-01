@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>复习</title>
+    <link rel="stylesheet" type="text/css" href="../css/general.css" />
+    <link rel="stylesheet" type="text/css" href="../css/rh_history.css" />
+    <style>
+        #historyHolder{
+            height: 80%!important;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <span id="width" class="sizeHolder">60vmin</span>
+    <span id="height" class="sizeHolder">80vmin</span>
+    <div id="historyHolder" class="textBox">
+    </div>
+    <script src="./jss/windowLoading.js"></script>
+    <script>
+        'use strict'
+        var poemList=window.parent.generalValues['poemList'];
+        poemList.forEach(function(poemObj,poemIndex){
+            poemObj.content.forEach(function(sentenceObj,sentenceIndex){
+                if(sentenceObj.knowPoint<0){
+                    $('#historyHolder').append(getShowText({poemNo:poemIndex,sentenceNo:sentenceIndex,knowPoint:sentenceObj.knowPoint}));
+
+                }
+            })
+        })
+
+
+        function getShowText(record) {//{poemNo: "1", sentenceNo: "3", stateId: "forget"}
+            var poem = poemList[record.poemNo];
+            var sentencePos = parseInt(record.sentenceNo)    
+            var kokoko='<span class="answer">'+poem.content[sentencePos].text+'</span>';
+            if (sentencePos == 0) { //first sentence ___aaa
+                return recodeDiv(kokoko + poem.content[sentencePos + 1].text);
+            }
+            if (sentencePos == poem.content.length - 1) { //last sentence aaa___
+                return recodeDiv(poem.content[sentencePos - 1].text + kokoko);
+            }
+            if (poem.content[sentencePos].pos == "head" && poem.content[sentencePos + 1].pos != "head") { //head sentence ___aaa
+                return recodeDiv(kokoko + poem.content[sentencePos + 1].text);
+            }
+            if (poem.content[sentencePos].pos == "end") { //end sentence aaa___
+                return recodeDiv(poem.content[sentencePos - 1].text + kokoko);
+            }
+            if (poem.content[sentencePos].pos == "mid") { //middle sentence aaa ___ aaa
+                return recodeDiv(poem.content[sentencePos - 1].text + kokoko + poem.content[sentencePos + 1].text);
+            }
+            function recodeDiv(text){
+                return '<div class="sentence '+getKnowClass(record).type+'"><span class="SentenceText">'+text+'</span><span class="poemName">'+poem.name+'</span><span class="SentenceState">'+getKnowClass(record).text+'</span></div>'
+            }
+            function getKnowClass(element){
+                if(typeof(element.knowPoint)=='undefined'){return 'untested';}
+                if(element.knowPoint>2){return {type:'i',text:'i'};}
+                if(element.knowPoint>0){return {type:'p',text:'p'};}
+                if(element.knowPoint>-2){return {type:'c',text:'有小错误'};}
+                if(element.knowPoint>-3){return {type:'d',text:'不太记得'};}
+                if(element.knowPoint<=-3){return {type:'f',text:'全无印象'};}
+            }            
+        }
+    </script>
+</body>
+
+</html>
