@@ -8,6 +8,37 @@
         #historyHolder{
             height: 80%!important;
         }
+        #settingHolder {
+            width: 100%;
+            height: 8%;
+            overflow: hidden;
+            top:82%;
+            left: 0;
+            position: absolute;
+            transform: none;
+            transform: translate(0,0)!important;
+        }
+        #testNumLable {
+            font-size: 3.5vmin;
+            position: absolute;
+            left:15%;
+            top:50%;
+            transform: translate(0,-50%);
+        }
+
+        #testNumShower {
+            font-size: 3.5vmins;
+            position: absolute;
+            left:63%;
+            top:50%;
+            transform: translate(0,-50%);
+        }
+        #readyBtn {
+            position: absolute;
+            top: 95%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 
@@ -15,22 +46,36 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <span id="width" class="sizeHolder">60vmin</span>
     <span id="height" class="sizeHolder">80vmin</span>
-    <div id="historyHolder" class="textBox">
-    </div>
+    <div id="historyHolder" class="textBox"></div>
+
+        <div id="settingHolder" class="textbox">
+            <span id="testNumLable">测试次数</span>
+            <span id="testNumShower">0</span>
+            <input id="testNumRange" type="range" oninput="getVal(this.value)" onchange="getVal(this.value)">
+        </div>
+        <div id="readyBtn" class="okBtn">确认</div>
     <script src="./jss/windowLoading.js"></script>
     <script>
         'use strict'
+        var sentenceNum=0;
+        var valJust=50;
         var poemList=window.parent.generalValues['poemList'];
+        var sentenceList = [];
         poemList.forEach(function(poemObj,poemIndex){
             poemObj.content.forEach(function(sentenceObj,sentenceIndex){
                 if(sentenceObj.knowPoint<0){
                     $('#historyHolder').append(getShowText({poemNo:poemIndex,sentenceNo:sentenceIndex,knowPoint:sentenceObj.knowPoint}));
-
+                    sentenceNum++;
+                    sentenceList.push({
+                            "poemNo": poemIndex,
+                            "sentenceNo": sentenceIndex,
+                            "score": '-',
+                            "text": '?'
+                        });
                 }
             })
         })
-
-
+        $("#testNumShower").html(Math.round(sentenceNum * 0.5));
         function getShowText(record) {//{poemNo: "1", sentenceNo: "3", stateId: "forget"}
             var poem = poemList[record.poemNo];
             var sentencePos = parseInt(record.sentenceNo)    
@@ -62,6 +107,29 @@
                 if(element.knowPoint<=-3){return {type:'f',text:'全无印象'};}
             }            
         }
+        function getVal(val) {
+            valJust = val;
+            $("#testNumShower").html(Math.round(sentenceNum * val / 100));
+        }
+        $("#readyBtn").click(function (e) {
+            var randomList = [];
+            for (var i = 0; i < Math.round(sentenceNum * valJust / 100); i++) {
+                var m = Math.round(Math.random() * sentenceList.length);
+                if (m == sentenceList.length) {
+                    m = 0;
+                }
+                randomList.push(sentenceList.splice(m, 1)[0]);
+            }
+            if (randomList.length != 0) {
+                window.parent.generalValues['testList'] = randomList;
+                window.parent.newWindow('test');
+                window.parent.closeForm('reviewWindow');
+            } else {
+                window.parent.generalValues['msg'] = '请至少选择1句话';
+                window.parent.newWindow('msgBox');
+            }
+
+        });
     </script>
 </body>
 

@@ -117,7 +117,7 @@
     background-color: rgb(97, 147, 196, 0.75);
 }
 
-#userInput{
+.userInput{
     transform: translate(-50%,-50%);
     position: absolute;
     top:90%;

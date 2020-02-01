@@ -4,13 +4,13 @@ var nowTestId = 0;
 var testList;
 var poemList=window.parent.generalValues['poemList'];
 var hasEnded=false;
-$(document).ready(()=>{
-    testList = window.parent.generalValues['testList'];
-    testCount=testList.length;
-    showTestSentence(0);
-    countDown(30,0);
+var inputName=guid();
 
-})
+testList = window.parent.generalValues['testList'];
+testCount=testList.length;
+showTestSentence(0);
+countDown(30,0);
+$(".userInput").attr('id',inputName);
 
 
 $('#nextBtn').click(function () {
@@ -45,7 +45,7 @@ function nextSentence(){
         showTestSentence(nowTestId);
         countDown(30,nowTestId);
         $('#resultPanel').css('display', 'none');
-        $('#userInput').css('display','block')
+        $('.userInput').css('display','block')
         if(nowTestId==testList.length-1){
             $('#nextBtn').html('完成');
         }
@@ -76,12 +76,12 @@ function showAnswer() {
     hasEnded=true;
     $('#poemContext_real').html(getShowText(nowTestId,1));
     var reg=/[。？！，、；：“”‘’（）《》〈〉【】『』「」﹃﹄〔〕…—～﹏￥]/g;
-    var userInput=$('#userInput').val().replace(reg,'');
+    var userInput=$('.userInput').val().replace(reg,'');
     var answer=getShowText(nowTestId,2).replace(reg,'');
-    $('#userInput').css('display','none');
+    $('.userInput').css('display','none');
     $('#resultPanel').css('display', 'block');
     $('#resultPanel').html('请稍等');
-    $('#userInput').val('');
+    $('.userInput').val('');
     $.post("../jss/rhSever.php",{'actionCode':'checkSimilarity','data':{'userText':userInput,'answer':answer}}, function (data) {
         var a=calcScore(userInput,answer,JSON.parse(data).score)
         testList[nowTestId].score=a.score;
@@ -199,4 +199,11 @@ function getShowText(id,showWhat) {//id: testlist中的index; showWhat:{0为和�
     if (poem.content[testList[id].sentenceNo].pos == "mid") { //middle sentence aaa ___ aaa
         return poem.content[testList[id].sentenceNo - 1].text + kokoko + poem.content[testList[id].sentenceNo + 1].text;
     }
+}
+
+function guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
 }
