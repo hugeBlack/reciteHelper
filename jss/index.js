@@ -181,3 +181,7 @@ function request(actionCode,value){
         return(data);
     })
 }
+
+$('#loginBtn').click(function(){
+    window.location.href='http://hb.aigch.com/userSystem/login.html?from='+window.location.href;
+})
