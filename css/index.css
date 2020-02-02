@@ -49,11 +49,11 @@
     box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 }
 
-.desktopBtn:hover,#startBtn:hover,#syncBtn:hover{
+.desktopBtn:hover,#startBtn:hover,#syncBtn:hover,#loginBtn:hover{
     background-color: rgba(150,150,150,0.3);
 }
 
-#startBtn{
+#startBtn,#loginBtn{
     height: 20vmin;
     width: 20vmin;
     position: absolute;
@@ -65,8 +65,11 @@
     transition: 0.5s;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 }
+#startBtn{
+    display: none;
+}
 
-#testBtnImg{
+.btnImg{
     position: absolute;
     transform: translate(-50%,-50%);
     top:30%;
@@ -75,7 +78,7 @@
     height: 4vmin;
 }
 
-#testBtnText{
+.btnText{
     font-size: 3vmin;
     position: absolute;
     transform: translate(-50%,-50%);

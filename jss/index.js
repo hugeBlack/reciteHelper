@@ -89,7 +89,8 @@ $('#personalInfoBtn').click(()=>{
     if(typeof(generalValues['personalInfo'])!="undefined"){
         newWindow('personalInfo');
     }else{
-        window.location.href='http://hb.aigch.com/userSystem/login.html?from='+window.location.href
+        generalValues['msg']='请登录';
+        newWindow('msgBox');
     }
     
 })
@@ -164,8 +165,13 @@ function getData(){
         if(data!='notLoggedin'){
             generalValues['personalInfo']=JSON.parse(data)
             $('#personalInfoBtnText').html(generalValues['personalInfo'].nickName);
+            $('#loginBtn').css('display','none');
+            $('#startBtn').css('display','block');
         }else{
+            generalValues['personalInfo']=undefined;
             $('#personalInfoBtnText').html('请登录');
+            $('#loginBtn').css('display','block');
+            $('#startBtn').css('display','none');
         }
     })
 }
