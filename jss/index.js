@@ -86,7 +86,12 @@ $('#seeAllBtn').click(()=>{
 })
 
 $('#personalInfoBtn').click(()=>{
-    newWindow('personalInfo');
+    if(typeof(generalValues['personalInfo'])!="undefined"){
+        newWindow('personalInfo');
+    }else{
+        window.location.href='http://hb.aigch.com/userSystem/login.html?from='+window.location.href
+    }
+    
 })
 
 $('#syncBtn').click(function(){
